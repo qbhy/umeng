@@ -1,7 +1,7 @@
 <?php
-require_once(dirname(__FILE__) . '/../AndroidNotification.php');
+require_once(dirname(__FILE__) . '/../IOSNotification.php');
 
-class AndroidFilecast extends AndroidNotification {
+class IOSFilecast extends IOSNotification {
 	function  __construct() {
 		parent::__construct();
 		$this->data["type"] = "filecast";
@@ -9,7 +9,14 @@ class AndroidFilecast extends AndroidNotification {
 	}
 
 	//return file_id if SUCCESS, else throw Exception with details.
-	public function uploadContents($content) {
+	function uploadContents($content) {
+		if ($this->data["appkey"] == NULL)
+			throw new Exception("appkey should not be NULL!");
+		if ($this->data["timestamp"] == NULL)
+			throw new Exception("timestamp should not be NULL!");
+		if (!is_string($content))
+			throw new Exception("content should be a string!");
+
 		$post = array("appkey"           => $this->data["appkey"],
 					  "timestamp"        => $this->data["timestamp"], 
 					  "content"          => $content
@@ -28,7 +35,7 @@ class AndroidFilecast extends AndroidNotification {
         $result = curl_exec($ch);
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $curlErrNo = curl_errno($ch);
-        $curlErr = curl_error($ch);  
+        $curlErr = curl_error($ch);
         curl_close($ch);
         print($result . "\r\n");
         if ($httpCode == "0") //time out 

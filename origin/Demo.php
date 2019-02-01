@@ -74,7 +74,7 @@ class Demo
         }
     }
 
-    function sendAndroidFilecast()
+    function sendAndroidFileCast()
     {
         try {
             $filecast = new AndroidFilecast();
@@ -123,7 +123,7 @@ class Demo
                 )
             );
 
-            $groupcast = new AndroidGroupcast();
+            $groupcast = new AndroidGroupCast();
             $groupcast->setAppMasterSecret($this->appMasterSecret);
             $groupcast->setPredefinedKeyValue("appkey", $this->appkey);
             $groupcast->setPredefinedKeyValue("timestamp", $this->timestamp);
