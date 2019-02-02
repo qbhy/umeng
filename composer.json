@@ -12,6 +12,9 @@
         "php": ">=7.1",
         "ext-json": ">=1.0"
     },
+    "require-dev": {
+        "illuminate/support": "^5.5"
+    },
     "autoload": {
         "psr-4": {
             "Qbhy\\Umeng\\": "src"
